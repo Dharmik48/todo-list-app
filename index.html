@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ToDo List</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+			integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<main class="sec">
+			<header>
+				<h1>ToDo List</h1>
+			</header>
+			<div class="tasks">
+				<p class="disabled">Your Tasks</p>
+				<ul class="tasks-wrapper">
+					<li>
+                        <input type="checkbox" /> 
+                        <p class="todo">Add filter option</p>
+                        <i class="far fa-trash-alt delete"></i>
+                    </li>
+					<li>
+                        <input type="checkbox" /> 
+                        <p class="todo">Go to Guitar Class</p>
+                        <i class="far fa-trash-alt delete"></i>
+                    </li>
+					<li>
+                        <input type="checkbox" /> 
+                        <p class="todo">Build a Javascript App</p>
+                        <i class="far fa-trash-alt delete"></i>
+                    </li>
+				</ul>
+			</div>
+			<div class="new-task btn">
+				<i class="fas fa-plus"></i>
+            </div>
+            <section class="hidden add-task sec">
+                <textarea placeholder="Enter new task here"></textarea>
+                <div class="add-task-btn btn">
+                    Add Task
+                    <!-- <i class="fas fa-chevron-up"></i> -->
+                </div>
+                <p class="disabled cancel">Cancel</p>
+            </section>
+		</main>
+
+		<script src="main.js"></script>
+	</body>
+</html>
