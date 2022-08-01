@@ -18,11 +18,13 @@ function setUpPage() {
 // Complete all Todo
 
 completeAllBtn.addEventListener('click', () => {
-    let savedTasks = JSON.parse(localStorage.getItem('tasks'))
-    
+    let savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    let taskTitles = document.querySelectorAll('.todo');
+
     for (let i = 0, len = savedTasks.length; i < len; i++) {
         var check = document.getElementsByName("completed")[i];
         check.checked = "checked";
+        updateTaskInStorage(taskTitles[i].innerHTML, true);
     }
 });
 
@@ -65,21 +67,39 @@ function hidePage() {
 };
 
 function createTodo(newTodo) {
+    const isChecked = newTodo.isChecked ? 'checked' : '';
+    const taskTitle = newTodo.title || newTodo;
     const demoTodo = document.createElement('LI');
-    demoTodo.innerHTML = "<input type='checkbox' name='completed'> <p class='todo'>" + newTodo + "</p><i class='far fa-trash-alt delete'></i>";
+    const createdElement = `<input type='checkbox' ${isChecked} name='completed' onchange='updateTaskInStorage("${taskTitle}")'> <p class='todo'>${taskTitle}</p><i class='far fa-trash-alt delete'></i>`;
+    demoTodo.innerHTML = createdElement;
     todoContainer.appendChild(demoTodo);
 };
 
 function saveTaskToStorage(addedTask) {
     let savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    savedTasks.push(addedTask);
+    const newTask = {
+        id: Date.now(),
+        title: addedTask,
+        isChecked: false
+    };
+    savedTasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(savedTasks));
 }
 
 function deleteTaskFromStorage(removedTask) {
+    console.log(removedTask);
     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
     const newTaskList = savedTasks.filter(taskItem => {
-        return taskItem !== removedTask;
+        return taskItem.title !== removedTask;
     });
     localStorage.setItem('tasks', JSON.stringify(newTaskList));
+}
+
+function updateTaskInStorage(completedTask, isCompleted) {
+    let savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    const taskIndex = savedTasks.findIndex(taskItem => {
+        return taskItem.title === completedTask;
+    });
+    savedTasks[taskIndex].isChecked = isCompleted || !savedTasks[taskIndex].isChecked;
+    localStorage.setItem('tasks', JSON.stringify(savedTasks));
 }
