@@ -3,6 +3,7 @@ let todoContainer = document.querySelector('.tasks-wrapper');
 let newBtn = document.querySelector('.new-task');
 let addBtn = document.querySelector('.add-task-btn');
 let cancelBtn = document.querySelector('.cancel');
+let completeAllBtn = document.querySelector('.complete-all');
 
 newBtn.addEventListener('click', hidePage);
 setUpPage();
@@ -13,6 +14,17 @@ function setUpPage() {
         createTodo(item);
     });
 }
+
+// Complete all Todo
+
+completeAllBtn.addEventListener('click', () => {
+    let savedTasks = JSON.parse(localStorage.getItem('tasks'))
+    
+    for (let i = 0, len = savedTasks.length; i < len; i++) {
+        var check = document.getElementsByName("completed")[i];
+        check.checked = "checked";
+    }
+});
 
 // Create TODO
 addBtn.addEventListener('click', () => {
@@ -54,7 +66,7 @@ function hidePage() {
 
 function createTodo(newTodo) {
     const demoTodo = document.createElement('LI');
-    demoTodo.innerHTML = "<input type='checkbox'> <p class='todo'>" + newTodo + "</p><i class='far fa-trash-alt delete'></i>";
+    demoTodo.innerHTML = "<input type='checkbox' name='completed'> <p class='todo'>" + newTodo + "</p><i class='far fa-trash-alt delete'></i>";
     todoContainer.appendChild(demoTodo);
 };
 
