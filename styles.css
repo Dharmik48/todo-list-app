@@ -135,12 +135,15 @@ input:checked + p {
 }
 
 .add-task {
-    position: absolute;
+    position: fixed;
     top: 0;
+    bottom: 0;
+    left: 0;
     right: 0;
     height: 212px;
     background-color: #f2f5fd;
     transition: transform 300ms;
+    margin:auto;
 }
 
 .complete-all {
