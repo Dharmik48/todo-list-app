@@ -135,12 +135,15 @@ input:checked + p {
 }
 
 .add-task {
-    position: absolute;
+    position: fixed;
     top: 0;
+    bottom: 0;
+    left: 0;
     right: 0;
-    height: 100%;
+    height: 212px;
     background-color: #f2f5fd;
     transition: transform 300ms;
+    margin:auto;
 }
 
 .complete-all {
@@ -187,4 +190,49 @@ li:hover .delete{
     pointer-events: all;
     opacity: 1;
     transform: translateX(0);
+}
+
+@keyframes blur {
+    from {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+        -moz-filter: blur(0px);
+        -o-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+    to {
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+    }
+}
+
+.blur {
+    animation-name: blur;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes unblur {
+    from {
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+    }
+    to {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+        -moz-filter: blur(0px);
+        -o-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+}
+.unblur {
+    animation-name: unblur;
+    animation-duration: 0.5s;
+    animation-fill-mode: reverse;
 }
