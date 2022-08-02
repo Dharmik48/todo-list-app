@@ -7,12 +7,8 @@ let completeAllBtn = document.querySelector('.complete-all');
 
 newBtn.addEventListener('click', () => {
     hidePage();
-    document.querySelector('.background').setAttribute('class', 'background blur');
-    newBtn.setAttribute('class', 'new-task btn blur');
-    completeAllBtn.setAttribute('class', 'complete-all btn blur');
+    document.querySelector('main').setAttribute('class', 'sec blur');
 });
-
-
 setUpPage();
 
 function setUpPage() {
@@ -28,29 +24,31 @@ completeAllBtn.addEventListener('click', () => {
     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
     let taskTitles = document.querySelectorAll('.todo');
 
-    for (let i = 0, len = savedTasks.length; i < len; i++) {
-        var check = document.getElementsByName("completed")[i];
+    for (let i = 0; i < savedTasks.length; i++) {
+        var check = document.getElementsByName('completed')[i];
         check.checked = "checked";
-        updateTaskInStorage(taskTitles[i].innerHTML, true);
+        const taskTitleId = Number(taskTitles[i].id);
+        updateTaskInStorage(taskTitleId, true);
     }
 });
 
 // Create TODO
 addBtn.addEventListener('click', () => {
-    newTodo = document.querySelector('textarea').value;
-    saveTaskToStorage(newTodo);
-    createTodo(newTodo);
+    const newTodoTitle = sanitiseInput(document.querySelector('textarea').value);
+
+    const newTodoTask = generateTask(newTodoTitle);
+
+    saveTaskToStorage(newTodoTask);
+    createTodo(newTodoTask);
     hidePage();
-    document.querySelector('.background').setAttribute('class', 'background unblur');
-    newBtn.setAttribute('class', 'new-task btn unblur');
-    completeAllBtn.setAttribute('class', 'complete-all btn unblur');
 });
 
 document.querySelector('textarea').addEventListener('keypress', (key) => {
-    newTodo = document.querySelector('textarea').value;
+    const newTodoTitle = sanitiseInput(document.querySelector('textarea').value);
+    const newTodoTask = generateTask(newTodoTitle);
     if (key.which === 13) {
-        saveTaskToStorage(newTodo);
-        createTodo(newTodo);
+        saveTaskToStorage(newTodoTask);
+        createTodo(newTodoTask);
         hidePage();
     }
 });
@@ -61,59 +59,88 @@ todoContainer.addEventListener('click', (e) => {
 
     if (item.classList[2] == 'delete') {
         item.parentElement.remove();
-        const taskTitle = item.parentElement.children[1].innerHTML;
-        deleteTaskFromStorage(taskTitle);
+        const taskId = Number(item.parentElement.children[1].id);
+        deleteTaskFromStorage(taskId);
     }
 });
 
-cancelBtn.addEventListener('click', () => {
-    document.querySelector('.background').setAttribute('class', 'background unblur');
-    newBtn.setAttribute('class', 'new-task btn unblur');
-    completeAllBtn.setAttribute('class', 'complete-all btn unblur');
-    hidePage();
-});
+cancelBtn.addEventListener('click', hidePage);
 
 function hidePage() {
     document.querySelector('.add-task').classList.toggle('hidden');
+
     if (document.querySelector('.add-task').classList[0] != 'hidden') {
         document.querySelector('textarea').focus();
     }
+
     document.querySelector('textarea').value = '';
+    document.querySelector('main').setAttribute('class', 'sec unblur');
 };
 
 function createTodo(newTodo) {
     const isChecked = newTodo.isChecked ? 'checked' : '';
-    const taskTitle = newTodo.title || newTodo;
+
     const demoTodo = document.createElement('LI');
-    const createdElement = `<input type='checkbox' ${isChecked} name='completed' onchange='updateTaskInStorage("${taskTitle}")'> <p class='todo'>${taskTitle}</p><i class='far fa-trash-alt delete'></i>`;
+    const createdElement = `<input type='checkbox' ${isChecked} name='completed' onchange="updateTaskInStorage(${newTodo.id})"> <p class='todo' id=${newTodo.id}>${newTodo.title}</p><i class='far fa-trash-alt delete'></i>`;
+
     demoTodo.innerHTML = createdElement;
     todoContainer.appendChild(demoTodo);
 };
 
 function saveTaskToStorage(addedTask) {
     let savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const newTask = {
-        id: Date.now(),
-        title: addedTask,
-        isChecked: false
-    };
-    savedTasks.push(newTask);
+
+    savedTasks.push(addedTask);
+
     localStorage.setItem('tasks', JSON.stringify(savedTasks));
 }
 
-function deleteTaskFromStorage(removedTask) {
+function deleteTaskFromStorage(removedTaskId) {
     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
+
     const newTaskList = savedTasks.filter(taskItem => {
-        return taskItem.title !== removedTask;
+        return taskItem.id !== removedTaskId;
     });
+
     localStorage.setItem('tasks', JSON.stringify(newTaskList));
 }
 
-function updateTaskInStorage(completedTask, isCompleted) {
+function updateTaskInStorage(completedTaskId, isCompleted) {
     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
+
     const taskIndex = savedTasks.findIndex(taskItem => {
-        return taskItem.title === completedTask;
+        return taskItem.id === completedTaskId;
     });
-    savedTasks[taskIndex].isChecked = isCompleted || !savedTasks[taskIndex].isChecked;
+
+    if (savedTasks[taskIndex]) {
+        savedTasks[taskIndex].isChecked = isCompleted || !savedTasks[taskIndex]?.isChecked;
+    }
     localStorage.setItem('tasks', JSON.stringify(savedTasks));
+}
+
+function sanitiseInput(htmlString) {
+    const entityMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;',
+        '`': '&#x60;',
+        '=': '&#x3D;'
+    };
+
+    const string = String(htmlString).replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+    });
+
+    return string.trim();
+}
+
+function generateTask(taskTitle) {
+    return {
+        id: Date.now(),
+        title: taskTitle,
+        isChecked: false
+    };
 }
