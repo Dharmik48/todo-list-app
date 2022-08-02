@@ -139,7 +139,6 @@ input:checked + p {
     top: 0;
     right: 0;
     height: 212px;
-    height: 100%;
     background-color: #f2f5fd;
     transition: transform 300ms;
 }
