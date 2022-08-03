@@ -236,3 +236,6 @@ li:hover .delete{
     animation-duration: 0.5s;
     animation-fill-mode: reverse;
 }
+
+.no-text-warning {
+    color: red;
