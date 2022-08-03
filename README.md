@@ -21,7 +21,7 @@ To install and run this project locally follow these steps:
    - if you use GitHub CLI run
 
    ```
-   gh repo clone https://github.com/Dharmik48/todo-list-app
+   git repo clone https://github.com/Dharmik48/todo-list-app
    ```
 
    - alternatively you can open the project in GitHub desktop or download it as a ZIP.
