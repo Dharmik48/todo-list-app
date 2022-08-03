@@ -5,7 +5,10 @@ let addBtn = document.querySelector('.add-task-btn');
 let cancelBtn = document.querySelector('.cancel');
 let completeAllBtn = document.querySelector('.complete-all');
 
-newBtn.addEventListener('click', hidePage);
+newBtn.addEventListener('click', () => {
+    hidePage();
+    document.querySelector('main').setAttribute('class', 'sec blur');
+});
 setUpPage();
 
 function setUpPage() {
@@ -71,6 +74,7 @@ function hidePage() {
     }
 
     document.querySelector('textarea').value = '';
+    document.querySelector('main').setAttribute('class', 'sec unblur');
 };
 
 function createTodo(newTodo) {
