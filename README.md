@@ -21,7 +21,7 @@ To install and run this project locally follow these steps:
    - if you use GitHub CLI run
 
    ```
-   gh repo clone https://github.com/Dharmik48/todo-list-app
+   git repo clone https://github.com/Dharmik48/todo-list-app
    ```
 
    - alternatively you can open the project in GitHub desktop or download it as a ZIP.
@@ -64,3 +64,10 @@ You need 0 coding knowledge to contribute to the project! Some good ideas for fi
 Just raise an [issue](https://github.com/Dharmik48/todo-list-app/issues/new) for it
 
 <!-- Please read [CONTRIBUTING](https://github.com/Dharmik48/todo-list-app/blob/main/CONTRIBUTING.md) for a full guide to contributing to this project. -->
+
+## Contributors List
+
+<a href="https://github.com/Dharmik48/todo-list-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Dharmik48/todo-list-app" />
+</a>
+
