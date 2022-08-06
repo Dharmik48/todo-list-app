@@ -40,9 +40,7 @@ addBtn.addEventListener('click', () => {
     
     
     if (input == '') {
-        setTimeout(function() {
-            
-        }, 100);
+        setTimeout(function() {document.querySelector('.no-text-warning').setAttribute('style', null);}, 100);
     } else {
         saveTaskToStorage(newTodoTask);
         createTodo(newTodoTask);
@@ -80,7 +78,7 @@ cancelBtn.addEventListener('click', hidePage);
 
 function hidePage() {
     document.querySelector('.add-task').classList.toggle('hidden');
-    document.querySelector('.no-text-warning').setAttribute('style', 'opacity: 0;');
+    document.querySelector('.no-text-warning').setAttribute('style', 'display: none;');
     if (document.querySelector('.add-task').classList[0] != 'hidden') {
         document.querySelector('textarea').focus();
     }
