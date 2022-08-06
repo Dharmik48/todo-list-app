@@ -34,22 +34,32 @@ completeAllBtn.addEventListener('click', () => {
 
 // Create TODO
 addBtn.addEventListener('click', () => {
-    const newTodoTitle = sanitiseInput(document.querySelector('textarea').value);
-
+    let input = document.querySelector('textarea').value;
+    const newTodoTitle = sanitiseInput(input);
     const newTodoTask = generateTask(newTodoTitle);
-
-    saveTaskToStorage(newTodoTask);
-    createTodo(newTodoTask);
-    hidePage();
+    
+    
+    if (input == '') {
+        setTimeout(function() {document.querySelector('.no-text-warning').setAttribute('style', null);}, 100);
+    } else {
+        saveTaskToStorage(newTodoTask);
+        createTodo(newTodoTask);
+        hidePage();
+    }
 });
 
 document.querySelector('textarea').addEventListener('keypress', (key) => {
     const newTodoTitle = sanitiseInput(document.querySelector('textarea').value);
     const newTodoTask = generateTask(newTodoTitle);
     if (key.which === 13) {
-        saveTaskToStorage(newTodoTask);
-        createTodo(newTodoTask);
-        hidePage();
+        if (document.querySelector('textarea').value == '') {
+            document.querySelector('.no-text-warning').setAttribute('style', null);
+            setTimeout(function() {clearTextarea();}, 1);
+        } else {
+            saveTaskToStorage(newTodoTask);
+            createTodo(newTodoTask);
+            hidePage();
+        }
     }
 });
 
@@ -68,7 +78,7 @@ cancelBtn.addEventListener('click', hidePage);
 
 function hidePage() {
     document.querySelector('.add-task').classList.toggle('hidden');
-
+    document.querySelector('.no-text-warning').setAttribute('style', 'display: none;');
     if (document.querySelector('.add-task').classList[0] != 'hidden') {
         document.querySelector('textarea').focus();
     }
@@ -143,4 +153,8 @@ function generateTask(taskTitle) {
         title: taskTitle,
         isChecked: false
     };
+}
+
+function clearTextarea() {
+    document.querySelector('textarea').value = '';
 }
