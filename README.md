@@ -50,11 +50,9 @@ This should start the dev server in your browser. If you're having any environme
 
 ## Examples
 
-Here are some screenshot examples of the app
 
-<img width="1434" alt="image" src="https://user-images.githubusercontent.com/35187140/182510763-a6c3ffd0-86aa-42da-8550-1fd55eacfb9f.png">
-
-<img width="1436" alt="Screen Shot 2022-08-03 at 7 55 53 AM" src="https://user-images.githubusercontent.com/35187140/182510833-69126e60-1fb1-4118-83b2-75445675e9e7.png">
+![todo-list_screenshot](https://user-images.githubusercontent.com/58708222/183256697-50de3214-fe7e-4c9e-857c-ea926503ad45.png)
+![todo-list_screenshot-2](https://user-images.githubusercontent.com/58708222/183256888-2942358e-5182-4541-a8c5-47eb321249cf.png)
 
 
 ## Contribution
