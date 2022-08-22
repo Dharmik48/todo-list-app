@@ -1,5 +1,5 @@
 # todo-list-app
-A simple but useless TODO List
+A simple but useful TODO List
 
 You can check it out here 👇
 
