@@ -50,6 +50,7 @@ main {
     width: 100%;
     margin: 25px 0px;
     padding-bottom: 10px;
+    
 }
 
 .tasks-wrapper {
@@ -86,7 +87,7 @@ input {
 
 input:checked + p {
     text-decoration: line-through;
-    color: #919191;
+    color: #10d534;
 }
 
 .btn {
@@ -110,6 +111,10 @@ input:checked + p {
     bottom: 15px;
 }
 
+.new-task:hover {
+    background: #aa00ff;
+}
+
 .new-task i {
     border-radius: 0px;
     display: inline-block;
@@ -122,6 +127,10 @@ input:checked + p {
     box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.4);
     right: 25px;
     bottom: 20px;
+}
+
+.add-task-btn:hover {
+    background:#aa00ff ;
 }
 
 .add-task-btn i {
@@ -155,6 +164,10 @@ input:checked + p {
     bottom: 15px;
 }
 
+.complete-all:hover {
+    background: #aa00ff;
+}
+
 .add-task textarea {
     border: none;
     outline: none;
@@ -172,6 +185,13 @@ input:checked + p {
     bottom: 30px;
     left: 30px;
     cursor: pointer;
+    font-size: 0.9rem;
+    transition-duration: 5ms;
+}
+
+.cancel:hover {
+    color: rgb(192, 33, 33);
+    border: none;
 }
 
 .delete {
@@ -239,3 +259,4 @@ li:hover .delete{
 
 .no-text-warning {
     color: red;
+}
