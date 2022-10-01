@@ -190,7 +190,7 @@ input:checked + p {
 }
 
 .cancel:hover {
-    color: rgb(192, 33, 33);
+    color: #aa00ff;
     border: none;
 }
 
@@ -258,5 +258,5 @@ li:hover .delete{
 }
 
 .no-text-warning {
-    color: red;
+    color: rgb(203, 52, 52);
 }
