@@ -4,8 +4,18 @@ let newBtn = document.querySelector('.new-task');
 let addBtn = document.querySelector('.add-task-btn');
 let cancelBtn = document.querySelector('.cancel');
 let completeAllBtn = document.querySelector('.complete-all');
+let section = document.querySelector('.add-task');
 
-newBtn.addEventListener('click', () => {
+section.addEventListener('click',event => event.stopPropagation())
+
+function mainOnclickHandler(){
+    if (!document.querySelector('.add-task').getAttribute('class').includes('hidden')) {
+        hidePage()
+    }
+}
+
+newBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
     hidePage();
     document.querySelector('main').setAttribute('class', 'sec blur');
 });
@@ -20,7 +30,8 @@ function setUpPage() {
 
 // Complete all Todo
 
-completeAllBtn.addEventListener('click', () => {
+completeAllBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
     let taskTitles = document.querySelectorAll('.todo');
 
@@ -33,7 +44,8 @@ completeAllBtn.addEventListener('click', () => {
 });
 
 // Create TODO
-addBtn.addEventListener('click', () => {
+addBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
     let input = document.querySelector('textarea').value;
     const newTodoTitle = sanitiseInput(input);
     const newTodoTask = generateTask(newTodoTitle);
