@@ -49,8 +49,7 @@ addBtn.addEventListener('click', (event) => {
     let input = document.querySelector('textarea').value;
     const newTodoTitle = sanitiseInput(input);
     const newTodoTask = generateTask(newTodoTitle);
-    
-    
+       
     if (input == '') {
         setTimeout(function() {document.querySelector('.no-text-warning').setAttribute('style', null);}, 100);
     } else {
@@ -76,6 +75,7 @@ document.querySelector('textarea').addEventListener('keypress', (key) => {
 });
 
 // Delete Todo
+
 todoContainer.addEventListener('click', (e) => {
     const item = e.target;
 
@@ -99,7 +99,7 @@ function hidePage() {
     document.querySelector('main').setAttribute('class', 'sec unblur');
 };
 
-function createTodo(newTodo) {
+function createTodo(newTodo)  {
     const isChecked = newTodo.isChecked ? 'checked' : '';
 
     const demoTodo = document.createElement('LI');
@@ -109,7 +109,7 @@ function createTodo(newTodo) {
     todoContainer.appendChild(demoTodo);
 };
 
-function saveTaskToStorage(addedTask) {
+ function saveTaskToStorage(addedTask)  {
     let savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     savedTasks.push(addedTask);
@@ -127,20 +127,20 @@ function deleteTaskFromStorage(removedTaskId) {
     localStorage.setItem('tasks', JSON.stringify(newTaskList));
 }
 
-function updateTaskInStorage(completedTaskId, isCompleted) {
-    let savedTasks = JSON.parse(localStorage.getItem('tasks'));
+ function updateTaskInStorage(completedTaskId, isCompleted) {
+     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
 
-    const taskIndex = savedTasks.findIndex(taskItem => {
-        return taskItem.id === completedTaskId;
-    });
+     const taskIndex = savedTasks.findIndex(taskItem => {
+         return taskItem.id === completedTaskId;
+     });
 
-    if (savedTasks[taskIndex]) {
-        savedTasks[taskIndex].isChecked = isCompleted || !savedTasks[taskIndex]?.isChecked;
-    }
-    localStorage.setItem('tasks', JSON.stringify(savedTasks));
-}
+     if (savedTasks[taskIndex]) {
+         savedTasks[taskIndex].isChecked = isCompleted || !savedTasks[taskIndex]?.isChecked;
+     }
+     localStorage.setItem('tasks', JSON.stringify(savedTasks));
+ }
 
-function sanitiseInput(htmlString) {
+ function sanitiseInput(htmlString) {
     const entityMap = {
         '&': '&amp;',
         '<': '&lt;',
@@ -159,7 +159,7 @@ function sanitiseInput(htmlString) {
     return string.trim();
 }
 
-function generateTask(taskTitle) {
+ function generateTask(taskTitle) {
     return {
         id: Date.now(),
         title: taskTitle,
